@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Age(),
+      home: Age()
     );
   }
 }
@@ -20,8 +20,8 @@ class Age extends StatefulWidget {
 }
 
 class _AgeState extends State<Age> {
-  int d = 0, m = 0, y = 0,mn,dy,hr,min;
-  String day1 = "",month1 = "",year1 = "",day3 = "",month3 = "",years = "",months = "",weeks="",days = "",hours="",minutes="";
+  int d = 0, m = 0, y = 0, mn, dy, hr, min;
+  String day1 = "", month1 = "", year1 = "", day3 = "", month3 = "", years = "", months = "", weeks="", days = "", hours="", minutes="";
 
   a(){
     setState(() {
@@ -35,22 +35,18 @@ class _AgeState extends State<Age> {
 
       if (d1 - d >= 0){
         day1 = (d1 - d).toString() + " days";
-      }
-      else{
+      } else{
         day1 = (d1 + day - d).toString() + " days";
         m1 = m1 - 1;
       }
-
       if (m1 - m >= 0){
         month1 = (m1 - m).toString() + " months  |";
         mn = m1 - m;
-      }
-      else{
+      } else{
         month1 = (m1 + 12 - m).toString() + " months  |";
         y1 = y1 - 1;
         mn = m1 + 12 - m;
       }
-
       year1 = (y1 - y).toString() + " years";
 
       var diff = DateTime.now().difference(DateTime(2001,07,17));
@@ -80,12 +76,13 @@ class _AgeState extends State<Age> {
       } else{
         day3 = (d - d1).toString() + " days";
       }
-      if (m1 - m > 0)
+      if (m1 - m > 0){
         month3 = (12-m1+m).toString() + " months  |";
-      else if(m1-m == 0  && d1-d == 0)
+      } else if(m1-m == 0  && d1-d == 0){
         month3 = "12 months  |";
-      else
+      } else {
         month3 = (m-m1).toString() + " months  |";
+      }
     });
   }
 
@@ -132,12 +129,13 @@ class _AgeState extends State<Age> {
       home: Scaffold(
           backgroundColor: _color,
           appBar: AppBar(
-            title: Text('Age', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            title: Text('Age',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
             backgroundColor: Colors.deepOrange,
             centerTitle: true,
             leading: Container(
               child: IconButton(
-                icon: Icon(_icon,size: 30),
+                icon: Icon(_icon, size: 30),
                 onPressed: (){
                   setState(() {
                     if(_icon == Icons.lightbulb){
@@ -147,8 +145,7 @@ class _AgeState extends State<Age> {
                       _bcolor = Color(0xff2b2c2e);
                       _tcolor = Colors.white;
                       _brightness = Brightness.dark;
-                    }
-                    else if(_icon == Icons.lightbulb_outline_sharp){
+                    } else if(_icon == Icons.lightbulb_outline_sharp){
                       _icon = Icons.lightbulb;
                       darkTheme = false;
                       _color = Colors.white;
@@ -184,7 +181,8 @@ class _AgeState extends State<Age> {
                         ),
                         child: Column(
                           children: [
-                            Text('Date of birth',style: TextStyle(fontSize: 25, color: _tcolor)),
+                            Text('Date of birth',
+                                style: TextStyle(fontSize: 25, color: _tcolor)),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 10.0),
                               child: Container(
@@ -194,9 +192,7 @@ class _AgeState extends State<Age> {
                               ),
                             ),
                             CupertinoTheme(
-                              data: CupertinoThemeData(
-                                brightness: _brightness,
-                              ),
+                              data: CupertinoThemeData(brightness: _brightness),
                               child: Container(
                                   height: MediaQuery.of(context).copyWith().size.height / 10,
                                   width: MediaQuery.of(context).copyWith().size.width,
@@ -205,6 +201,7 @@ class _AgeState extends State<Age> {
                                     minimumYear: 1900,
                                     maximumYear: 2100,
                                     maximumDate: DateTime.now(),
+                                    mode: CupertinoDatePickerMode.date,
                                     backgroundColor: _bcolor,
                                     onDateTimeChanged: (date1) {
                                       setState(() {
@@ -215,6 +212,7 @@ class _AgeState extends State<Age> {
                                         int m1 = int.parse(DateFormat("MM").format(DateTime.now()));
                                         int y1 = int.parse(DateFormat("yyyy").format(DateTime.now()));
                                         int day = find(m1-1, y1);
+
                                         if (d1 - d >= 0){
                                           day1 = (d1 - d).toString() + " days";
                                         } else{
@@ -230,6 +228,7 @@ class _AgeState extends State<Age> {
                                           mn = m1 + 12 - m;
                                         }
                                         year1 = (y1 - y).toString() + " years";
+
                                         var diff = DateTime.now().difference(date1);
                                         dy = diff.inDays;
                                         hr = diff.inHours;
@@ -259,15 +258,15 @@ class _AgeState extends State<Age> {
                                           day3 = (d - d1).toString() + " days";
                                         }
 
-                                        if (m1 - m > 0)
+                                        if (m1 - m > 0){
                                           month3 = (12-m1+m).toString() + " months  |";
-                                        else if(m1-m == 0 && d1-d == 0)
+                                        } else if(m1-m == 0 && d1-d == 0){
                                           month3 = "12 months  |";
-                                        else
+                                        } else{
                                           month3 = (m-m1).toString() + " months  |";
+                                        }
                                       });
                                     },
-                                    mode: CupertinoDatePickerMode.date,
                                   )
                               ),
                             ),
@@ -288,7 +287,8 @@ class _AgeState extends State<Age> {
                           ),
                           child: Column(
                             children: [
-                              Text('Age',style: TextStyle(fontSize: 25, color: _tcolor)),
+                              Text('Age',
+                                  style: TextStyle(fontSize: 25, color: _tcolor)),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 10.0),
                                 child: Container(
@@ -297,8 +297,10 @@ class _AgeState extends State<Age> {
                                           bottom: BorderSide(color: Colors.grey.shade700))),
                                 ),
                               ),
-                              Text(year1,style:TextStyle(fontSize: 60, color: Colors.deepOrange)),
-                              Text(month1 + "  " + day1,style: TextStyle(fontSize: 20,color: _tcolor)),
+                              Text(year1,
+                                  style:TextStyle(fontSize: 60, color: Colors.deepOrange)),
+                              Text(month1 + "  " + day1,
+                                  style: TextStyle(fontSize: 20,color: _tcolor)),
                             ],
                           )),
                       Container(
@@ -315,18 +317,18 @@ class _AgeState extends State<Age> {
                           ),
                           child: Column(
                             children: [
-                              Text('Next birthday',style: TextStyle(fontSize: 25, color: _tcolor)),
+                              Text('Next birthday',
+                                  style: TextStyle(fontSize: 25, color: _tcolor)),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 10.0),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      border: Border(
-                                          bottom:
-                                          BorderSide(color: Colors.grey.shade700))),
+                                      border: Border(bottom: BorderSide(color: Colors.grey.shade700))),
                                 ),
                               ),
                               Icon(Icons.cake_rounded, color: Colors.deepOrange, size: 80),
-                              Text(month3 + "  " + day3,style: TextStyle(fontSize: 20,color: _tcolor)),
+                              Text(month3 + "  " + day3,
+                                  style: TextStyle(fontSize: 20,color: _tcolor)),
                             ],
                           )),
                       Container(
@@ -343,14 +345,13 @@ class _AgeState extends State<Age> {
                           ),
                           child: Column(
                             children: [
-                              Text('Summary',style: TextStyle(fontSize: 25, color: Colors.deepOrange)),
+                              Text('Summary',
+                                  style: TextStyle(fontSize: 25, color: Colors.deepOrange)),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 10.0),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      border: Border(
-                                          bottom:
-                                          BorderSide(color: Colors.grey.shade700))),
+                                      border: Border(bottom: BorderSide(color: Colors.grey.shade700))),
                                 ),
                               ),
                               Row(
